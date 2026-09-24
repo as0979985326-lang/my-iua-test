@@ -1,5 +1,57 @@
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "RSE2 Test",
-    Text = "Script loaded!",
-    Duration = 5
-})
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "RSE2_GUI"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 420, 0, 300)
+frame.Position = UDim2.new(0.5, -210, 0.5, -150)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+frame.BorderSizePixel = 0
+frame.Parent = gui
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 50)
+title.BackgroundTransparency = 1
+title.Text = "RSE2 Stock Exchange"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 24
+title.Font = Enum.Font.GothamBold
+title.Parent = frame
+
+local status = Instance.new("TextLabel")
+status.Size = UDim2.new(1, -40, 0, 40)
+status.Position = UDim2.new(0, 20, 0, 70)
+status.BackgroundTransparency = 1
+status.Text = "Status: Connected"
+status.TextColor3 = Color3.fromRGB(100, 255, 100)
+status.TextSize = 18
+status.Font = Enum.Font.Gotham
+status.Parent = frame
+
+local stock = Instance.new("TextLabel")
+stock.Size = UDim2.new(1, -40, 0, 40)
+stock.Position = UDim2.new(0, 20, 0, 120)
+stock.BackgroundTransparency = 1
+stock.Text = "Stock: TEST   Price: $100"
+stock.TextColor3 = Color3.fromRGB(255, 255, 255)
+stock.TextSize = 18
+stock.Font = Enum.Font.Gotham
+stock.Parent = frame
+
+local close = Instance.new("TextButton")
+close.Size = UDim2.new(0, 100, 0, 40)
+close.Position = UDim2.new(0.5, -50, 1, -60)
+close.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
+close.Text = "Close"
+close.TextColor3 = Color3.fromRGB(255, 255, 255)
+close.TextSize = 18
+close.Font = Enum.Font.GothamBold
+close.Parent = frame
+
+close.MouseButton1Click:Connect(function()
+    gui:Destroy()
+end)
