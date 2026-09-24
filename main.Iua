@@ -1,24 +1,41 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
-local found = {}
+local prices = {}
 
 for _, obj in ipairs(player:WaitForChild("PlayerGui"):GetDescendants()) do
     if obj:IsA("TextLabel") or obj:IsA("TextButton") then
-        if obj.Text == "6.07" then
-            table.insert(found, obj:GetFullName())
+        local text = obj.Text
+
+        if text and text:match("^%d+%.%d%d$") then
+            table.insert(prices, text)
         end
     end
 end
 
-local result = "找到 " .. #found .. " 個 6.07"
+-- 去除重複
+local unique = {}
 
-if #found > 0 then
-    result = result .. "\n" .. found[1]
+for _, price in ipairs(prices) do
+    unique[price] = true
+end
+
+local list = {}
+
+for price in pairs(unique) do
+    table.insert(list, price)
+end
+
+table.sort(list)
+
+local result = "找到 " .. #list .. " 個候選價格"
+
+if #list > 0 then
+    result = result .. "\n" .. table.concat(list, ", ")
 end
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "RSE2 價格測試",
+    Title = "RSE2 價格掃描",
     Text = result,
-    Duration = 8
+    Duration = 10
 })
