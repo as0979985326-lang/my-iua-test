@@ -1,1 +1,5 @@
-print("RSE2 script loaded")
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "RSE2 Test",
+    Text = "Script loaded!",
+    Duration = 5
+})
