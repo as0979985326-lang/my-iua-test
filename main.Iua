@@ -1,24 +1,24 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
-local count = 0
+local found = {}
 
 for _, obj in ipairs(player:WaitForChild("PlayerGui"):GetDescendants()) do
     if obj:IsA("TextLabel") or obj:IsA("TextButton") then
-        local text = obj.Text
-
-        if text and text:match("%d+%.%d+") then
-            count += 1
-
-            if count <= 5 then
-                print("候選價格:", text, "路徑:", obj:GetFullName())
-            end
+        if obj.Text == "6.07" then
+            table.insert(found, obj:GetFullName())
         end
     end
 end
 
+local result = "找到 " .. #found .. " 個 6.07"
+
+if #found > 0 then
+    result = result .. "\n" .. found[1]
+end
+
 game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "RSE2 掃描完成",
-    Text = "找到 " .. count .. " 個數字文字",
-    Duration = 5
+    Title = "RSE2 價格測試",
+    Text = result,
+    Duration = 8
 })
